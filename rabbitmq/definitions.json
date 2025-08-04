@@ -1,0 +1,83 @@
+{
+  "users": [
+    {
+      "name": "user_a",
+      "password": "1",
+      "tags": ""
+    },
+    {
+      "name": "thong",
+      "password": "1",
+      "tags": ""
+    },
+    {
+      "name": "admin",
+      "password": "1",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "host_a"
+    },
+    {
+      "name": "/"
+    },
+    {
+      "name": "my_host"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "admin",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "user_a",
+      "vhost": "host_a",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "thong",
+      "vhost": "my_host",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "message_router",
+      "vhost": "host_a",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "queues": [
+    {
+      "name": "queue_a",
+      "vhost": "host_a",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "message_router",
+      "vhost": "host_a",
+      "destination": "queue_a",
+      "destination_type": "queue",
+      "routing_key": "task_key",
+      "arguments": {}
+    }
+  ]
+}
